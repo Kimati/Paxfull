@@ -1,0 +1,11 @@
+<?php
+ 
+if (isset($_POST['functionToCall']) && function_exists($_POST['functionToCall'])) {
+  call_user_func($_POST['functionToCall']);
+}
+
+ function login(){
+    echo "Handling login"
+  }
+
+?>

